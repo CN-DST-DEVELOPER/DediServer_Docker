@@ -8,9 +8,10 @@ services:
       - 10998:10998/udp
       - 10999:10999/udp
     volumes:
-      # 左侧修改为你的存档目录
+      # 左侧修改为你的存档目录，是Cluster_1等的上层路径
       - ~/dst/saves:/root/.klei/DoNotStarveTogether
+      # 左侧修改为主机上储存mod目录，用以重建容器时mod不需要重新下载，此行非必需可删除
       - ~/dst/mods:/root/Steam/steamapps/common/Don't Starve Together Dedicated Server/mods
     environment:
-      # 修改为你的存档名
+      # 修改为你的存档名，默认为MyDediServer，此行非必需可删除
       - CLUSTER_NAME=MyDediServer
