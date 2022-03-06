@@ -21,7 +21,7 @@ version: '3'
 services:
   DST_DediServer:
     container_name: dst_server
-    image: ghcr.io/cn-dst-developer/dedicated_server_docker:latest
+    image: ghcr.io/cn-dst-developer/dediserver_docker:latest
     ports:
       # [服务器防火墙暴露端口]:[server.ini中设置的server_port]
       - 10998:10998/udp
