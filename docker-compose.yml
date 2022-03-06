@@ -12,6 +12,8 @@ services:
       - ~/dst/saves:/root/.klei/DoNotStarveTogether
       # 左侧修改为主机上储存mod目录，用以重建容器时mod不需要重新下载，此行非必需可删除
       - ~/dst/mods:/root/Steam/steamapps/common/Don't Starve Together Dedicated Server/mods
+      # 左侧修改为主机上储存v2版本mod目录，用以重建容器或切换存档时v2版本mod不需要重新下载，此行非必需可删除
+      - ~/dst/ugc_mods:/root/Steam/steamapps/workshop/content/322330
     environment:
       # 修改为你的存档名，默认为MyDediServer，此行非必需可删除
       - CLUSTER_NAME=MyDediServer
