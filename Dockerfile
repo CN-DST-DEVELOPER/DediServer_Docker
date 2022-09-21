@@ -1,5 +1,5 @@
 FROM centos:centos7.9.2009
-LABEL org.opencontainers.image.source https://github.com/cn-dst-developer/dedicated_server_docker
+LABEL org.opencontainers.image.source https://github.com/cn-dst-developer/dediserver_docker
 RUN yum install -y wget glibc.i686 glibc.x86_64 libstdc++.x86_64 libcurl.x86_64 &&\
     ln -s /usr/lib64/libcurl.so.4 /usr/lib64/libcurl-gnutls.so.4
 

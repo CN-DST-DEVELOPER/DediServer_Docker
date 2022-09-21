@@ -31,27 +31,31 @@ check_for_file "$dontstarve_dir/$cluster_name/cluster_token.txt"
 check_for_file "$dontstarve_dir/$cluster_name/Master/server.ini"
 check_for_file "$dontstarve_dir/$cluster_name/Caves/server.ini"
 
-./steamcmd.sh +force_install_dir "$install_dir" +login anonymous +app_update 343050 validate +quit
+mod_download=""
 
 if [ -e "$dontstarve_dir/$cluster_name/Master/modoverrides.lua" ]; then
 	modlist=($(cat "$dontstarve_dir/$cluster_name/Master/modoverrides.lua" | grep -o "\[\"workshop-[0-9]*\"\]="))
-	for mod in ${modlist[*]}; do echo "ServerModSetup("${mod: 1: 0-2}")">>"$install_dir/mods/dedicated_server_mods_setup.lua"; done
+	for mod in ${modlist[*]}; do mod_download="$mod_download +workshop_download_item 322330 ${mod: 11: 0-3}"; done
 fi
 
 if [ -e "$dontstarve_dir/$cluster_name/Caves/modoverrides.lua" ]; then
 	modlist=($(cat "$dontstarve_dir/$cluster_name/Caves/modoverrides.lua" | grep -o "\[\"workshop-[0-9]*\"\]="))
-	for mod in ${modlist[*]}; do echo "ServerModSetup("${mod: 1: 0-2}")">>"$install_dir/mods/dedicated_server_mods_setup.lua"; done
+	for mod in ${modlist[*]}; do mod_download="$mod_download +workshop_download_item 322330 ${mod: 11: 0-3}"; done
 fi
+
+./steamcmd.sh +login anonymous $mod_download +force_install_dir "$install_dir" +app_update 343050 validate +quit
 
 check_for_file "$install_dir/bin64"
 
 cd "$install_dir/bin64" || fail
 
 run_shared=(./dontstarve_dedicated_server_nullrenderer_x64)
-run_shared+=(-ugc_directory "/root/Steam/steamapps/workshop")
+run_shared+=(-ugc_directory '/root/Steam/steamapps/workshop')
 run_shared+=(-console)
 run_shared+=(-cluster "$cluster_name")
 run_shared+=(-monitor_parent_process $$)
+
+echo "Start Dedicated Server"
 
 nohup "${run_shared[@]}" -shard Caves >> /dev/null 2>&1 &
 nohup "${run_shared[@]}" -shard Master >> /dev/null 2>&1
