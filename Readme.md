@@ -39,7 +39,7 @@ services:
     logging:
       options:
         max-size: 10m
-        max-file: 3
+        max-file: "3"
 ```
 
 ports 子项冒号左侧的端口号需要在防火墙打开，例如打开 27017 端口
