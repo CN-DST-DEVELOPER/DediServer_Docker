@@ -2,7 +2,9 @@
 
 ### 0.简介
 
-本镜像用以快速部署独立服务器，上传存档文件，无需考虑独立服务器手动安装 mod，加载存档时将自动从工坊下载存档所需的 mod
+本镜像用以快速部署独立服务器，上传存档文件即可启动服务器，无需考虑独立服务器手动安装 mod，加载存档时将自动从工坊下载存档所需的 mod
+
+**注意：v0.2 版本与之前版本配置文件不兼容，需要修改`docker-compose.yml`**
 
 ### 1.安装 docker 和 docker-compose
 
@@ -28,11 +30,11 @@ services:
       - 10999:10999/udp
     volumes:
       # 左侧修改为你的存档目录，是Cluster_1等的上层路径
-      - ~/dst/saves:/root/.klei/DoNotStarveTogether
+      - ~/dst/saves:/usr/steamapps/dst/saves
       # 左侧修改为主机上储存mod目录，用以重建容器时mod不需要重新下载，此行非必需可删除
-      - ~/dst/mods:/root/Steam/steamapps/common/Don't Starve Together Dedicated Server/mods
+      - ~/dst/mods:/usr/steamapps/dst/dedicated_server/mods
       # 左侧修改为主机上储存v2版本mod目录，用以重建容器或切换存档时v2版本mod不需要重新下载，此行非必需可删除
-      - ~/dst/ugc_mods:/root/Steam/steamapps/workshop/content/322330
+      - ~/dst/ugc_mods:/usr/steamapps/workshop/content/322330
     environment:
       # 修改为你的存档名，默认为MyDediServer，此行非必需可删除
       - CLUSTER_NAME=MyDediServer
