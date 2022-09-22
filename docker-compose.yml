@@ -17,3 +17,8 @@ services:
     environment:
       # 修改为你的存档名，默认为MyDediServer，此行非必需可删除
       - CLUSTER_NAME=MyDediServer
+    logging:
+      options:
+        max-size: 10m
+        max-file: 3
+
