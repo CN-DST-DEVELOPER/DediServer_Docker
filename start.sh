@@ -70,5 +70,5 @@ run_shared+=(-cluster "$cluster_name")
 run_shared+=(-monitor_parent_process $$)
 
 echo "Dedicated Server Started. For more detial about game server running, please check server_log.txt in shard dictionary."
-nohup "${run_shared[@]}" -shard Master >>/dev/null 2>&1 &
-nohup "${run_shared[@]}" -shard Caves >>/dev/null 2>&1
+nohup "${run_shared[@]}" -shard Master >/dev/null 2>&1 &
+nohup "${run_shared[@]}" -shard Caves >/dev/null 2>&1
